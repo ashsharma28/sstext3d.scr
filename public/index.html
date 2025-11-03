@@ -12,7 +12,8 @@
 <body>
 	<a href="https://github.com/surdu/sstext3d.scr" id="forkMe">
 		<img loading="lazy" width="149" height="149"
-			src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+			src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png"
+			alt="Fork me on GitHub" />
 	</a>
 
 	<div id="main">
@@ -20,7 +21,7 @@
 			<div class="field">
 				<label class="label">Text</label>
 				<div class="control">
-					<input class="input" type="text" placeholder="Screensaver Text" name="text" maxlength="20" />
+					<input class="input" type="password" placeholder="Screensaver Text" name="text" maxlength="20" />
 				</div>
 			</div>
 
@@ -53,6 +54,8 @@
 		</form>
 	</div>
 	<script src="main.min.js"></script>
+	<!-- canvas-confetti loaded from CDN so the screensaver can trigger celebrations without bundling the lib -->
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 
 </html>
