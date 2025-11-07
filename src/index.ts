@@ -78,6 +78,7 @@ export default class ScreenSaver3DText {
 	private _confettiCanvas: HTMLCanvasElement | null = null;
 	private _confetti: any | null = null;
 	private _confettiActive = false;
+	private _touchTimeout: any = null;
 	private _handleKeydown = (e: KeyboardEvent) => {
 		if (e.key === "Escape" || e.key === "Esc") {
 			this.stop();
@@ -92,12 +93,30 @@ export default class ScreenSaver3DText {
 	};
 	private _handleTouchEnd = (_e: TouchEvent) => {
 		const now = Date.now();
-		// double-tap within 300ms triggers exit
-		if (now - this._lastTap <= 300) {
+		const DOUBLE_TAP_MS = 300;
+
+		if (now - this._lastTap <= DOUBLE_TAP_MS) {
+			// double-tap detected: cancel pending single-tap action and exit
+			if (this._touchTimeout) {
+				clearTimeout(this._touchTimeout);
+				this._touchTimeout = null;
+			}
 			this.stop();
-		} else {
-			this._lastTap = now;
+			this._lastTap = 0;
+			return;
 		}
+
+		// record time of this tap and schedule single-tap action after timeout
+		this._lastTap = now;
+		if (this._touchTimeout) {
+			clearTimeout(this._touchTimeout);
+		}
+		this._touchTimeout = setTimeout(() => {
+			this._touchTimeout = null;
+			// single tap -> center actors (like Enter)
+			this.centerActors();
+			this._lastTap = 0;
+		}, DOUBLE_TAP_MS + 10);
 	};
 
 	constructor(userOptions?: Partial<Options>) {
@@ -369,6 +388,12 @@ export default class ScreenSaver3DText {
 			this._confettiCanvas = null;
 		}
 		this._confetti = null;
+
+		// clear any pending touch single-tap timeout
+		if (this._touchTimeout) {
+			clearTimeout(this._touchTimeout);
+			this._touchTimeout = null;
+		}
 	}
 
 

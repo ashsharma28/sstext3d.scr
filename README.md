@@ -1,4 +1,4 @@
-# Windows XP 3D Text Screensaver (browser)
+# Name Revealing Screen Display in  style of Windows XP Screensaver 
 
 This repo is a small browser-based remake of the classic Windows XP 3D text screensaver using Three.js.
 
@@ -6,7 +6,7 @@ This branch adds a few interactive features and a short demo recording (embedded
 
 ## What I implemented in this branch
 
-- Multiple text actors: the input string is split into characters and each character becomes an independently animated 3D object.
+- Multiple text actors: the input string is split into characters and each character becomes an independently  animated 3D object.
 - Center on Enter: pressing the `Enter` key will stop the free motion, align all characters horizontally in the same order as entered, and center them on screen.
 - Confetti celebration: after the text centers, a confetti celebration runs (using `canvas-confetti`) visible on top of the WebGL canvas.
 - Exit controls: screensaver no longer exits on mouse move. It exits on `Esc` key, or double-tap on mobile.
